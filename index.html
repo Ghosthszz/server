@@ -117,6 +117,38 @@
     }
 
     updateTimer();
+
+  function updateTimer() {
+    const timerElement = document.getElementById('timer');
+    let endTime = Number(localStorage.getItem('endTime')); // Obter o valor armazenado
+
+    if (!endTime || isNaN(endTime)) {
+      endTime = new Date().getTime() + 10 * 60 * 60 * 1000; // Definir o tempo inicial se não existir
+      localStorage.setItem('endTime', endTime); // Armazenar o tempo inicial
+    }
+
+    function update() {
+      const currentTime = new Date().getTime();
+      const timeRemaining = endTime - currentTime;
+
+      const hours = Math.floor(timeRemaining / (60 * 60 * 1000));
+      const minutes = Math.floor((timeRemaining % (60 * 60 * 1000)) / (60 * 1000));
+      const seconds = Math.floor((timeRemaining % (60 * 1000)) / 1000);
+
+      timerElement.textContent = `Tempo estimado: ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+      if (timeRemaining <= 0) {
+        clearInterval(interval);
+        timerElement.textContent = 'Tempo esgotado';
+      }
+    }
+
+    const interval = setInterval(update, 1000);
+    update();
+  }
+
+  updateTimer();
+
   </script>
 </body>
 </html>
