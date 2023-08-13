@@ -24,12 +24,12 @@
   .status {
     font-size: 24px;
     font-weight: bold;
-    color: #e74c3c;
+    color: #2ecc71; /* Alterado para verde */
     margin-bottom: 10px;
   }
   .server-icon {
     font-size: 64px;
-    color: #e74c3c;
+    color: #2ecc71; /* Alterado para verde */
     margin-bottom: 20px;
     animation: floatCloud 2s infinite alternate;
   }
@@ -69,10 +69,10 @@
     padding: 10px 0;
   }
   
-  /* Estilos para o timer */
-  #timer {
+  /* Estilos para o tempo de operação */
+  #uptime {
     font-size: 18px;
-    color: #3498db;
+    color: #27ae60; /* Alterado para verde */
     margin-top: 10px;
     font-weight: bold;
   }
@@ -81,70 +81,38 @@
 <body>
   <div class="server-box">
     <div class="server-icon">&#9729;</div>
-    <div class="status">Servidor Fora do Ar</div>
-    <p>:(</p>
-    <p class="highlight">Estamos trabalhando nisso!</p>
-    <div id="timer">Tempo estimado: 09:56:14</div>
+    <div class="status">Servidor Online</div>
+    <p>:)</p>
+    <p class="highlight">Tudo funcionando perfeitamente!</p>
+    <div id="uptime">Tempo de operação: <span id="operating-time">00:00:00</span></div>
+    <p>Obrigado pela compreensão.</p> <!-- Mensagem adicionada -->
   </div>
 
+  <footer>
+    &copy; 2023 @Ghostszz_ Todos os direitos reservados.
+  </footer>
+
   <script>
-    function updateTimer() {
-      const timerElement = document.getElementById('timer');
-      const endTime = new Date().getTime() + 10 * 60 * 60 * 1000;
+    function updateOperatingTime() {
+      const operatingTimeElement = document.getElementById('operating-time');
+      const startTime = new Date().getTime(); // Pega o tempo atual como tempo de início
 
       function update() {
         const currentTime = new Date().getTime();
-        const timeRemaining = endTime - currentTime;
+        const timeElapsed = currentTime - startTime;
 
-        const hours = Math.floor(timeRemaining / (60 * 60 * 1000));
-        const minutes = Math.floor((timeRemaining % (60 * 60 * 1000)) / (60 * 1000));
-        const seconds = Math.floor((timeRemaining % (60 * 1000)) / 1000);
+        const hours = Math.floor(timeElapsed / (60 * 60 * 1000));
+        const minutes = Math.floor((timeElapsed % (60 * 60 * 1000)) / (60 * 1000));
+        const seconds = Math.floor((timeElapsed % (60 * 1000)) / 1000);
 
-        timerElement.textContent = `Tempo estimado: ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-
-        if (timeRemaining <= 0) {
-          clearInterval(interval);
-          timerElement.textContent = 'Tempo esgotado';
-        }
+        operatingTimeElement.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
       }
 
-      const interval = setInterval(update, 1000);
+      setInterval(update, 1000);
       update();
     }
 
-    updateTimer();
-
-  function updateTimer() {
-    const timerElement = document.getElementById('timer');
-    let endTime = Number(localStorage.getItem('endTime')); // Obter o valor armazenado
-
-    if (!endTime || isNaN(endTime)) {
-      endTime = new Date().getTime() + 10 * 60 * 60 * 1000; // Definir o tempo inicial se não existir
-      localStorage.setItem('endTime', endTime); // Armazenar o tempo inicial
-    }
-
-    function update() {
-      const currentTime = new Date().getTime();
-      const timeRemaining = endTime - currentTime;
-
-      const hours = Math.floor(timeRemaining / (60 * 60 * 1000));
-      const minutes = Math.floor((timeRemaining % (60 * 60 * 1000)) / (60 * 1000));
-      const seconds = Math.floor((timeRemaining % (60 * 1000)) / 1000);
-
-      timerElement.textContent = `Tempo estimado: ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-
-      if (timeRemaining <= 0) {
-        clearInterval(interval);
-        timerElement.textContent = 'Tempo expedido, estamos trabalhando ainda';
-      }
-    }
-
-    const interval = setInterval(update, 1000);
-    update();
-  }
-
-  updateTimer();
-
+    updateOperatingTime();
   </script>
 </body>
 </html>
