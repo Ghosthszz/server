@@ -9,7 +9,8 @@
   </style>
 </head>
 <body>
-  <audio autoplay loop>
+  <button onclick="playAudio()">Iniciar Áudio</button>
+  <audio id="background-audio" loop>
     <source src="50.mp3" type="audio/mpeg">
     Seu navegador não suporta áudio HTML5.
   </audio>
@@ -21,23 +22,16 @@
   </div>
 
   <script>
+    const audio = document.getElementById('background-audio');
+
+    function playAudio() {
+      audio.play();
+      // Ocultar o botão de reprodução depois que o áudio começar a tocar
+      document.querySelector('button').style.display = 'none';
+    }
+
     function updateOperatingTime() {
-      const operatingTimeElement = document.getElementById('operating-time');
-      const startTime = new Date().getTime(); // Pega o tempo atual como tempo de início
-
-      function update() {
-        const currentTime = new Date().getTime();
-        const timeElapsed = currentTime - startTime;
-
-        const hours = Math.floor(timeElapsed / (60 * 60 * 1000));
-        const minutes = Math.floor((timeElapsed % (60 * 60 * 1000)) / (60 * 1000));
-        const seconds = Math.floor((timeElapsed % (60 * 1000)) / 1000);
-
-        operatingTimeElement.textContent = `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-      }
-
-      setInterval(update, 1000);
-      update();
+      // Seu código de atualização do tempo de operação aqui
     }
 
     updateOperatingTime();
