@@ -13,6 +13,8 @@
     align-items: center;
     justify-content: center;
     min-height: 100vh;
+    flex-direction: column;
+    position: relative; /* Adicionado para posicionar corretamente o footer */
   }
   .server-box {
     background-color: #292929;
@@ -29,7 +31,7 @@
   }
   .server-icon {
     font-size: 64px;
-    color: #e74c3c;
+    color: gray;
     margin-bottom: 20px;
     animation: floatCloud 2s infinite alternate;
   }
@@ -67,7 +69,7 @@
     background-color: #292929;
     color: #888;
     padding: 10px 0;
-  }
+}
   
   /* Estilos para o timer */
   #timer {
@@ -76,26 +78,22 @@
     margin-top: 10px;
     font-weight: bold;
   }
-#Ale {
-            font-size: 64px;
-            color: #e74c3c;
-            margin-bottom: 20px;
-            animation: floatCloud 2s infinite alternate;
+#teste {
+      max-width: 50px;
         }
-
-
 </style>
 </head>
 <body>
   <div class="server-box">
     <div class="server-icon">&#9729;</div>
     <div class="status">Servidor Fora do Ar</div>
-<div>
-<img src="alert.png" alt="alert" id="Ale">
+    <div>
+      <img id="teste" src="alert.png" alt="teste">
     </div>
     <p class="highlight">Estamos trabalhando nisso!</p>
-    
- 
+  </div>
+  <footer>
+    Todos direitos reservados <br> @2024 Ghosthszz_  </footer>
 
   <script>
     function updateTimer() {
@@ -110,7 +108,7 @@
         const minutes = Math.floor((timeRemaining % (60 * 60 * 1000)) / (60 * 1000));
         const seconds = Math.floor((timeRemaining % (60 * 1000)) / 1000);
 
-        timerElement.textContent = `Tempo estimado: $"">{hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        timerElement.textContent = `Tempo estimado: ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
 
         if (timeRemaining <= 0) {
           clearInterval(interval);
