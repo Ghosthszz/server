@@ -82,6 +82,7 @@
   <div class="server-box">
     <div class="server-icon">&#9729;</div>
     <div class="status">Servidor Fora do Ar</div>
+<img scr"alerta.png" alt="alert">
     
     <p class="highlight">Estamos trabalhando nisso!</p>
     
@@ -102,7 +103,7 @@
         const minutes = Math.floor((timeRemaining % (60 * 60 * 1000)) / (60 * 1000));
         const seconds = Math.floor((timeRemaining % (60 * 1000)) / 1000);
 
-        timerElement.textContent = `Tempo estimado: ${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        timerElement.textContent = `Tempo estimado: $"">{hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
 
         if (timeRemaining <= 0) {
           clearInterval(interval);
